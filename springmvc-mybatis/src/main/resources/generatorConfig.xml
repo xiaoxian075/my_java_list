@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry
+		location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
+	<context id="context1">
+	  	<commentGenerator>
+	    	<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+	    	<property name="suppressAllComments" value="true"/>
+ 	 	</commentGenerator>
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.199:3306/mybatis" userId="xiaoxian" password="123456" />
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.mybatis.entity" targetProject="springmvc-mybatis/src/main/java" />
+		<!-- 生成的映射文件报名和位置 -->
+		<sqlMapGenerator targetPackage="com.mybatis.mapper" targetProject="springmvc-mybatis/src/main/java" />
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator targetPackage="com.mybatis.dao" targetProject="springmvc-mybatis/src/main/java" type="XMLMAPPER" />
+		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
+		<!-- <table schema="ssm1" tableName="FILMINFO" domainObjectName="FilmInfo" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="FILMID" property="FILMID" />
+			<columnOverride column="FILMNAME" property="FILMNAME" />
+			<columnOverride column="TYPEID" property="TYPEID" />
+			<columnOverride column="ACTOR" property="ACTOR" />
+			<columnOverride column="DIRECTOR" property="DIRECTOR" />
+			<columnOverride column="TICKETPRICE" property="TICKETPRICE" />
+		</table>
+		<table tableName="FILMTYPE" domainObjectName="FiplType" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="TYPEID" property="TYPEID" />
+			<columnOverride column="TYPENAME" property="TYPENAME" />
+		</table> -->
+		<table schema="mybatis" tableName="user_t" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="id" property="id" />
+			<columnOverride column="user_name" property="username" />
+			<columnOverride column="password" property="password" />
+			<columnOverride column="age" property="age" />
+		</table>
+		<table schema="mybatis" tableName="good_info" domainObjectName="GoodInfo" enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<columnOverride column="id" property="id" />
+			<columnOverride column="name" property="name" />
+			<columnOverride column="serial_number" property="serialNumber" />
+			<columnOverride column="branch" property="branch" />
+			<columnOverride column="updatetime" property="updatetime" />
+		</table>
+	</context>
+</generatorConfiguration>

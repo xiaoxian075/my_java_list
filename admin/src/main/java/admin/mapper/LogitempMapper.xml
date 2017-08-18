@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin.mapper.LogitempMapper">
+
+<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+<!-- 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" > 
+	    <property name="timeToIdleSeconds" value="3600"/>1 hour
+	    <property name="timeToLiveSeconds" value="3600"/>1 hour
+	    <property name="maxEntriesLocalHeap" value="1000"/>
+	    <property name="maxEntriesLocalDisk" value="10000000"/>
+	    <property name="memoryStoreEvictionPolicy" value="LRU"/>
+	</cache> -->
+
+	<!-- t_ship_template -->
+	<resultMap id="resultShipTemplate" type="admin.entity.ShipTemplate" >
+		<result property="ship_id" column="ship_id" />
+		<result property="com_id" column="com_id" />
+		<result property="goods_id" column="goods_id" />
+		<result property="ship_name" column="ship_name" />
+		<result property="start_area" column="start_area" />
+		<result property="send_time_id" column="send_time_id" />
+		<result property="send_time" column="send_time" />
+		<result property="valuation_mode" column="valuation_mode" />
+		<result property="express_id_str" column="express_id_str" />
+		<result property="free_ship" column="free_ship" />
+		<result property="state" column="state" />
+		<result property="tem_modify_time" column="tem_modify_time" />
+	</resultMap>
+	
+	<!-- t_areaset -->
+	<resultMap id="resultAreaset" type="admin.entity.Areaset" >
+		<result property="as_id" column="as_id" />
+		<result property="ship_id" column="ship_id" />
+		<result property="express_start" column="express_start" />
+		<result property="express_price" column="express_price" />
+		<result property="express_plus" column="express_plus" />
+		<result property="express_priceplus" column="express_priceplus" />
+		<result property="express_id" column="express_id" />
+		<result property="default_ship" column="default_ship" />
+	</resultMap>
+
+	<!-- t_reach_area -->
+	<resultMap id="resultReachArea" type="admin.entity.ReachArea" >
+		<result property="rea_id" column="rea_id" />
+		<result property="as_id" column="as_id" />
+		<result property="end_area" column="end_area" />
+	</resultMap>
+	
+	<select id="selectcountShipTemplateByShipname" parameterType="map" resultType="int">	
+		SELECT
+			count(ship_id) 
+		FROM 
+			`t_ship_template`
+		WHERE
+			1 = 1
+			<if test="ship_name != null">
+				AND `ship_name`=#{ship_name}
+			</if>
+	</select>
+
+	<select id="selectlistShipTemplateByShipname" parameterType="map" resultMap="resultShipTemplate">
+        SELECT
+			`ship_id`,
+			`com_id`,
+			`goods_id`,
+			`ship_name`,
+			`start_area`,
+			`send_time_id`,
+			`send_time`,
+			`valuation_mode`,
+			`express_id_str`,
+			`free_ship`,
+			`state`,
+			`tem_modify_time`
+        FROM
+        	`t_ship_template`
+		WHERE
+			1=1
+			<if test="ship_name != null">
+				AND `ship_name`=#{ship_name}
+			</if>
+			ORDER BY `ship_id` DESC
+	</select>
+	
+	<select id="selectlistShipTemplateByComId" parameterType="BigInteger" resultMap="resultShipTemplate">
+        SELECT
+			`ship_id`,
+			`com_id`,
+			`goods_id`,
+			`ship_name`,
+			`start_area`,
+			`send_time_id`,
+			`send_time`,
+			`valuation_mode`,
+			`express_id_str`,
+			`free_ship`,
+			`state`,
+			`tem_modify_time`
+        FROM
+        	`t_ship_template`
+		WHERE
+			`com_id`=#{com_id}
+	</select>
+
+	<select id="selectlistAreasetByShipId" parameterType="BigInteger" resultMap="resultAreaset">
+        SELECT
+			`as_id`,
+			`ship_id`,
+			`express_start`,
+			`express_price`,
+			`express_plus`,
+			`express_priceplus`,
+			`express_id`,
+			`default_ship`
+        FROM
+        	`t_areaset`
+		WHERE
+			`ship_id`=#{ship_id}
+	</select>
+	
+	<select id="selectlistReachAreaByAsId" parameterType="BigInteger" resultMap="resultReachArea">
+        SELECT
+			`rea_id`,
+			`as_id`,
+			`end_area`
+        FROM
+        	`t_reach_area`
+		WHERE
+			`as_id`=#{as_id}
+	</select>
+	
+	<select id="selectShipTemplate" parameterType="BigInteger" resultType="admin.entity.ShipTemplate">
+        SELECT
+			`ship_id`,
+			`com_id`,
+			`goods_id`,
+			`ship_name`,
+			`start_area`,
+			`send_time_id`,
+			`send_time`,
+			`valuation_mode`,
+			`express_id_str`,
+			`free_ship`,
+			`state`,
+			`tem_modify_time`
+        FROM
+        	`t_ship_template`
+		WHERE
+			`ship_id`=#{ship_id}
+		LIMIT 1
+	</select>
+
+	<select id="selectAreaset" parameterType="BigInteger" resultType="admin.entity.Areaset">
+        SELECT
+			`as_id`,
+			`ship_id`,
+			`express_start`,
+			`express_price`,
+			`express_plus`,
+			`express_priceplus`,
+			`express_id`,
+			`default_ship`
+        FROM
+        	`t_areaset`
+		WHERE
+			`as_id`=#{as_id}
+		LIMIT 1;
+	</select>
+	
+	<select id="selectReachArea" parameterType="BigInteger" resultType="admin.entity.ReachArea">
+        SELECT
+			`rea_id`,
+			`as_id`,
+			`end_area`
+        FROM
+        	`t_reach_area`
+		WHERE
+			`rea_id`=#{rea_id}
+		LIMIT 1
+	</select>
+	
+	<insert id="insertShipTemplate" parameterType="admin.entity.ShipTemplate">
+		INSERT INTO
+			`t_ship_template`
+				(
+					`ship_id`,
+					`com_id`,
+					`goods_id`,
+					`ship_name`,
+					`start_area`,
+					`send_time_id`,
+					`send_time`,
+					`valuation_mode`,
+					`express_id_str`,
+					`free_ship`,
+					`state`,
+					`tem_modify_time`					
+				)
+		VALUES
+				(
+					#{ship_id},
+					#{com_id},
+					#{goods_id},
+					#{ship_name},
+					#{start_area},
+					#{send_time_id},
+					#{send_time},
+					#{valuation_mode},
+					#{express_id_str},
+					#{free_ship},
+					#{state},
+					#{tem_modify_time}
+				)
+	</insert>
+	
+	
+	<insert id="insertAreaset" parameterType="admin.entity.Areaset">
+		INSERT INTO
+			`t_areaset`
+				(
+					`as_id`,
+					`ship_id`,
+					`express_start`,
+					`express_price`,
+					`express_plus`,
+					`express_priceplus`,
+					`express_id`,
+					`default_ship`				
+				)
+		VALUES
+				(
+					#{as_id},
+					#{ship_id},
+					#{express_start},
+					#{express_price},
+					#{express_plus},
+					#{express_priceplus},
+					#{express_id},
+					#{default_ship}
+				)
+	</insert>
+	
+	<insert id="insertReachArea" parameterType="admin.entity.ReachArea">
+		INSERT INTO
+			`t_reach_area`
+				(
+					`rea_id`,
+					`as_id`,
+					`end_area`			
+				)
+		VALUES
+				(
+					#{rea_id},
+					#{as_id},
+					#{end_area}
+				)
+	</insert>
+
+	
+	<update id="updateShipTemplate" parameterType="admin.entity.ShipTemplate">
+		UPDATE
+			`t_ship_template`
+		SET
+			`com_id`=#{com_id},
+			`goods_id`=#{goods_id},
+			`ship_name`=#{ship_name},
+			`start_area`=#{start_area},
+			`send_time_id`=#{send_time_id},
+			`send_time`=#{send_time},
+			`valuation_mode`=#{valuation_mode},
+			`express_id_str`=#{express_id_str},
+			`free_ship`=#{free_ship},
+			`tem_modify_time`=#{tem_modify_time}
+		WHERE
+			`ship_id`=#{ship_id}
+		LIMIT 1
+	</update>
+	
+	<update id="updateAreaset" parameterType="admin.entity.Areaset">
+		UPDATE
+			`t_areaset`
+		SET
+			`ship_id`=#{ship_id},
+			`express_start`=#{express_start},
+			`express_price`=#{express_price},
+			`express_plus`=#{express_plus},
+			`express_priceplus`=#{express_plus},
+			`express_id`=#{express_plus},
+			`default_ship`=#{default_ship}
+		WHERE
+			`as_id`=#{as_id}
+		LIMIT 1
+	</update>
+	
+	<update id="updateReachArea" parameterType="admin.entity.ReachArea">
+		UPDATE
+			`t_reach_area`
+		SET
+			`as_id`=#{as_id},
+			`end_area`=#{end_area}	
+		WHERE
+			`rea_id`=#{rea_id}
+		LIMIT 1
+	</update>
+	<select id="selectByComId" parameterType="java.lang.String" resultType="admin.entity.ShipTemplate">
+		select * from t_ship_template where com_id=#{id}
+	</select>
+	
+	
+	<update id="updateShipTemplateState" parameterType="map">
+		UPDATE
+			`t_ship_template`
+		SET
+			`state`=#{state}
+		WHERE
+			`ship_id`=#{ship_id}
+		LIMIT 1
+	</update>
+	
+	<delete id="deleteShipTemplateStatus" parameterType="BigInteger">
+		DELETE FROM 
+			`t_ship_template`
+		WHERE 
+			`ship_id`=#{ship_id}
+		LIMIT 1
+	</delete>
+	
+</mapper> 
+
