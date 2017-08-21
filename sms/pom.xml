@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.aten</groupId>
-  <artifactId>sms-service</artifactId>
+  <groupId>com.hytf</groupId>
+  <artifactId>sms</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>sms-service</name>
+  <name>sms</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -46,7 +46,5 @@
 	    <artifactId>fastjson</artifactId>
 	    <version>1.2.32</version>
 	</dependency>
-
-	
   </dependencies>
 </project>

@@ -1,19 +1,17 @@
-package com.aten.yzyj;
-
-
+package com.hytf.sms;
 
 import java.util.List;
 
-import com.aten.yzyj.inter.AtyNet;
-import com.aten.yzyj.inter.ModelNode;
-import com.aten.yzyj.inter.ReqMsg;
+import com.hytf.sms.third.AtyNet;
+import com.hytf.sms.third.ModelNode;
+import com.hytf.sms.third.ReqMsg;
 
 /**
  * Hello world!
  *
  */
 public class App {
-	
+
 	private static final String APPKEY = "c45db841fcf37e48e379e0123193cbf6";
 
     public static void main( String[] args ) {

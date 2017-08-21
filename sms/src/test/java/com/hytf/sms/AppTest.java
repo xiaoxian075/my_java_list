@@ -1,4 +1,4 @@
-package com.aten.yzyj;
+package com.hytf.sms;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

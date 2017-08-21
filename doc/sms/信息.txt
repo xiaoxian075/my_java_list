@@ -1,0 +1,10 @@
+【豪霆云】您的验证码是#num#
+这个是我们的测试模板  #里的参数可以修改
+唯一key值：c45db841fcf37e48e379e0123193cbf6
+
+
+http://www.renxinl.com:8080/rxl2016/login!init.action 
+账号：18078810328 密码：123456
+
+https://www.yunpian.com/entry 
+账号：18102825156 密码：18102825156hty

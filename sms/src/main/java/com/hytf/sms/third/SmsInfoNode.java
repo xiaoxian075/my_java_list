@@ -1,4 +1,4 @@
-package com.aten.yzyj.inter;
+package com.hytf.sms.third;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

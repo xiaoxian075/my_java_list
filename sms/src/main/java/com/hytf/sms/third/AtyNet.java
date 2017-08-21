@@ -1,4 +1,4 @@
-package com.aten.yzyj.inter;
+package com.hytf.sms.third;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
