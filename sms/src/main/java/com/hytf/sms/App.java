@@ -5,6 +5,7 @@ import java.util.List;
 import com.hytf.sms.third.AtyNet;
 import com.hytf.sms.third.ModelNode;
 import com.hytf.sms.third.ReqMsg;
+import com.hytf.sms.third.UserNode;
 
 /**
  * Hello world!
@@ -16,7 +17,7 @@ public class App {
 
     public static void main( String[] args ) {
 
-    	ReqMsg<List<ModelNode>> reqmsg = AtyNet.getModel(APPKEY);
+    	//ReqMsg<List<ModelNode>> reqmsg = AtyNet.getModel(APPKEY);
 
     	
     	
@@ -36,6 +37,7 @@ public class App {
     	
 //    	ReqMsg<ModelNode> reqmsg = AtyNet.updModel(APPKEY, 1909034, "【123】213213fee");
     	
+    	ReqMsg<UserNode> reqmsg = AtyNet.getUser(APPKEY);
     	
     	System.out.println("code:"+reqmsg.getCode());
     	System.out.println("code:"+reqmsg.getDesc());

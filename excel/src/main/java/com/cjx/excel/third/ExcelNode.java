@@ -43,10 +43,26 @@ public class ExcelNode {
 		this.listSheet = listSheet;
 	}
 
-	public <T extends ExcelBase> List<List<T>> get(Class<T> clazz) {
+	public <T extends ExcelBase> List<List<T>> getAll(Class<T> clazz) {
 		List<List<T>> listData = new ArrayList<List<T>>();
 		for (ExcelSheet sheet : listSheet) {
-			listData.add(sheet.get(clazz));
+			listData.add(sheet.getAll(clazz));
+		}
+		return listData;
+	}
+	
+	public List<List<String>> getHead() {
+		List<List<String>> listData = new ArrayList<List<String>>();
+		for (ExcelSheet sheet : listSheet) {
+			listData.add(sheet.getHead());
+		}
+		return listData;
+	}
+	
+	public <T extends ExcelBase> List<List<T>> getData(Class<T> clazz) {
+		List<List<T>> listData = new ArrayList<List<T>>();
+		for (ExcelSheet sheet : listSheet) {
+			listData.add(sheet.getData(clazz));
 		}
 		return listData;
 	}

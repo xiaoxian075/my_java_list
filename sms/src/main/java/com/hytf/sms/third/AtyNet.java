@@ -29,6 +29,9 @@ public class AtyNet {
 	//查屏蔽词
 	private static final String GET_BLACK_WORD = "http://sms.haotingyun.com/v2/sms/get_black_word.json";
 	
+	//查询用户
+	private static final String GET_USER = "http://sms.haotingyun.com/v2/user/get.json";
+	
 	
 	//获取模板
 	private static final String GET_MODEL = "http://sms.haotingyun.com/v2/tpl/get.json";
@@ -47,6 +50,18 @@ public class AtyNet {
 	private static final String BATCHSEND_SMS = "http://sms.haotingyun.com/v2/sms/batch_send.json"; 
 	 
 
+	/**
+	 * 获取用户信息
+	 */
+	public static ReqMsg<UserNode> getUser(String apikey) {
+		if (StringUtils.isBlank(apikey))
+			return new ReqMsg<UserNode>(1001,"参数出错",null);
+
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("apikey", apikey);
+		return postObj(GET_USER,params,UserNode.class);
+	}
+	
 	/**
 	 * 查屏蔽词
 	 * @param apikey

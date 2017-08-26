@@ -8,7 +8,7 @@ import com.cjx.excel.third.ExcelBase;
 
 
 public class Book implements ExcelBase,Serializable {
-	private static final long serialVersionUID = -2636048961306386414L;
+	private static final long serialVersionUID = 4803775458484283217L;
 	
 	private int id;
 	private String name;
@@ -45,7 +45,16 @@ public class Book implements ExcelBase,Serializable {
 		return "Book [id=" + id + ", name=" + name + ", type=" + type + "]";
 	}
 	
-	@Override
+	public static List<String> toHead() {
+		List<String> arrStr = new ArrayList<String>();
+		
+		arrStr.add("天有");
+		arrStr.add("国是");
+		arrStr.add("海雨");
+		
+		return arrStr;
+	}
+	
 	public List<String> toList() {
 		List<String> arrStr = new ArrayList<String>();
 		
@@ -56,7 +65,6 @@ public class Book implements ExcelBase,Serializable {
 		return arrStr;
 	}
 	
-	@Override
 	public void toT(List<String> listStr) {
 		if (listStr!=null) {
 			int count = listStr.size();
@@ -68,5 +76,7 @@ public class Book implements ExcelBase,Serializable {
 				type = listStr.get(2);
 		}
 	}
+	
+	
 }
 

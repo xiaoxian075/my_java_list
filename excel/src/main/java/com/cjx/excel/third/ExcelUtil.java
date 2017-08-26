@@ -16,7 +16,6 @@ import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
 
 public class ExcelUtil {
 	public static boolean toExcel(ExcelNode excel, String filaName) {
@@ -70,7 +69,7 @@ public class ExcelUtil {
 			} finally {
 				try {
 					bWorkbook.close();
-				} catch (WriteException | IOException e) {
+				} catch (Exception e) {
 				}
 			}
 			return result;

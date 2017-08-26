@@ -11,6 +11,35 @@ public class ExcelSheet implements Serializable {
 	private String name;	//名称
 	private List<List<String>> listRow;	//索引里的内容
 	
+	public boolean setHead(List<String> head) {
+		if (head==null || head.size()==0)
+			return false;
+		listRow.clear();
+		listRow.add(head);
+		return true;
+	}
+	
+	public <T extends ExcelBase> boolean set(List<T> listT) {
+		if (listT==null || listT.size()==0)
+			return false;
+		listRow.clear();
+		for (T t : listT) {
+			listRow.add(t.toList());
+		}
+		return true;
+	}
+	
+	public <T extends ExcelBase> boolean set(List<String> head, List<T> listT) {
+		if (head==null || head.size()==0 || listT==null || listT.size()==0)
+			return false;
+		listRow.clear();
+		listRow.add(head);
+		for (T t : listT) {
+			listRow.add(t.toList());
+		}
+		return true;
+	}
+	
 	public <T extends ExcelBase> void add(List<T> listT) {
 		if (listT==null || listT.size()==0)
 			return;
@@ -19,7 +48,7 @@ public class ExcelSheet implements Serializable {
 		}
 	}
 	
-	public <T extends ExcelBase> List<T> get(Class<T> clazz) {
+	public <T extends ExcelBase> List<T> getAll(Class<T> clazz) {
 		
 		List<T> listT = new ArrayList<T>();
 		try {
@@ -35,9 +64,34 @@ public class ExcelSheet implements Serializable {
 		return listT;
 	}
 	
+	public List<String> getHead() {
+		if (listRow!=null && listRow.size()>0)
+			return listRow.get(0);
+		return null;
+	}
+
+	public <T extends ExcelBase> List<T> getData(Class<T> clazz) {
+		
+		List<T> listT = new ArrayList<T>();
+		try {
+			int count = listRow.size();
+			for (int i=1; i<count; i++) {
+				List<String> ls = listRow.get(i);
+				T t = clazz.newInstance();
+				t.toT(ls);
+				listT.add(t);
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		
+		return listT;
+	}
+	
 	
 	public ExcelSheet() {
 		super();
+		this.listRow = new ArrayList<List<String>>();
 	}
 	public ExcelSheet(int index, String name) {
 		super();
